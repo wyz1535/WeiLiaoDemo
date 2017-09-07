@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript">
+    function sum(a,b){
+    return a+b;
+    }
+    function s(){
+    window.android.back();
+
+    }
+     function m(){
+    var result =window.android.back01();
+    document.getElementById("p").innerHTML=result;
+    }
+    </script>
+</head>
+<body>
+
+<button onclick="s()"><b>调用本地方法</b></button>
+<br>
+<br>
+
+<button onclick="m()"><b>调用本地方法02</b></button>
+
+<a href="http://www.baidu.com">点击</a>
+<br>
+<br>
+<table border="1">
+    <caption><b><font size="5">维修网点</font></b></caption>
+    <tr>
+        <th>省</th>
+        <th>所在地</th>
+        <th>详细地址</th>
+    </tr>
+    <tr>
+        <td>江苏省</td>
+        <td><font size="3" color=ff0000">南京市</font></td>
+        <td>粮道街112号粮道街112号粮道街112号粮道街112号粮道街112号粮道街112号粮道街112号粮道街112号粮道街112号</td>
+    </tr>
+    <tr>
+        <td>江苏省</td>
+        <td>南京市</td>
+        <td>粮道街184号</td>
+    </tr>
+</table>
+<br>
+<br>
+<form action="/demo/demo_form.asp">
+    身份证:
+    <input type="text" name="身份证" value="Mickey">
+    <br>
+    <hr>
+    姓 名:
+    <input type="text" name="姓名" value="Mouse">
+    <br><br>
+    <input type="submit" value="Submit">
+</form>
+<hr>
+<img src="http://192.168.0.105:8080/webImg/01.jpg" width="100%" height="auto"
+     onclick='window.open("http://www.baidu.com")' alt="test"/>
+
+<p id="p"></p>
+<div class="nav">导航</div>
+</body>
+</html>

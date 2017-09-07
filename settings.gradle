@@ -1,0 +1,4 @@
+include ':app', ':IMLib', ':CallKit', ':IMKit', ':CallLib', ':RedPacket'
+//rootProject.name = 'IMKit'
+//def libsRootDir = new File( settingsDir, '../node_modules/SalesforceMobileSDK-Android/libs' )
+//project( ':IMKit' ).projectDir = new File( libsRootDir, 'IMKit' )
