@@ -143,6 +143,21 @@
                 android:text="retrofit_Rxjava"
                 android:textAllCaps="false" />
 
+
+            <Button
+                android:id="@+id/btn_video_play"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="videos play"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_view_canvas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="view的绘制"
+                android:textAllCaps="false" />
+
         </LinearLayout>
 
     </ScrollView>

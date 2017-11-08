@@ -3,6 +3,7 @@ package com.leyifu.weiliaodemo.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.GsonBuilder;
@@ -10,6 +11,8 @@ import com.leyifu.weiliaodemo.R;
 import com.leyifu.weiliaodemo.bean.BookDetailBean;
 import com.leyifu.weiliaodemo.interf.Presenter;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,8 +24,20 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-public class RetrofitRxJavaActivity extends AppCompatActivity {
+public class RetrofitRxJavaActivity extends AppCompatActivity{
 
+    @BindView(R.id.btn_test_01)
+    Button btnTest01;
+    @BindView(R.id.btn_test_02)
+    Button btnTest02;
+    @BindView(R.id.btn_test_03)
+    Button btnTest03;
+    @BindView(R.id.btn_test_04)
+    Button btnTest04;
+    @BindView(R.id.btn_test_05)
+    Button btnTest05;
+    @BindView(R.id.btn_test_06)
+    Button btnTest06;
     private TextView textview;
     public static final String TAG = "RetrofitRxJavaActivity";
 
@@ -31,6 +46,7 @@ public class RetrofitRxJavaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_retrofit_rx_java);
+        ButterKnife.bind(this);
 
         textview = ((TextView) findViewById(R.id.textview));
 
@@ -75,7 +91,7 @@ public class RetrofitRxJavaActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<BookDetailBean> call, Response<BookDetailBean> response) {
                 BookDetailBean body = response.body();
-                textview.setText(body+"");
+                textview.setText(body + "");
             }
 
             @Override
@@ -85,4 +101,5 @@ public class RetrofitRxJavaActivity extends AppCompatActivity {
         });
 
     }
+
 }

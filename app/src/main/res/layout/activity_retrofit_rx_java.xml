@@ -4,11 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.leyifu.weiliaodemo.activity.RetrofitRxJavaActivity">
+
+    <Button
+        android:id="@+id/btn_test_01"
+        android:text="btn_test_01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="btn_test_02"
+        android:id="@+id/btn_test_02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:text="btn_test_03"
+        android:id="@+id/btn_test_03"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:textAllCaps="false"
+        android:text="btn_test_04"
+        android:id="@+id/btn_test_04"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:textAllCaps="false"
+        android:text="btn_test_05"
+        android:id="@+id/btn_test_05"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="btn_test_06"
+        android:textAllCaps="false"
+        android:id="@+id/btn_test_06"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
 
 </LinearLayout>

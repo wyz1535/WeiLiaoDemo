@@ -113,7 +113,11 @@
         <activity android:name=".activity.RippleActivity" />
         <activity android:name=".activity.DrawArcActivity" />
         <activity android:name=".activity.RxJavaActivity" />
-        <activity android:name=".activity.RetrofitRxJavaActivity"></activity>
+        <activity android:name=".activity.RetrofitRxJavaActivity" />
+        <activity android:name=".activity.VideosPlayActivity" />
+        <activity android:name=".activity.ViewCanvasActivity" />
+        <activity android:name=".activity.ViewCanvasTextActivity" />
+        <activity android:name=".activity.ViewCanvasClipActivity"></activity>
     </application>
 
 </manifest>

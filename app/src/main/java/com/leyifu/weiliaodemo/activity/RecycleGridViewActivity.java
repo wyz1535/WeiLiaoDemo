@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 
 import com.leyifu.weiliaodemo.R;
-import com.leyifu.weiliaodemo.adpter.MyAdapter;
+import com.leyifu.weiliaodemo.adapter.MyAdapter;
 import com.leyifu.weiliaodemo.bean.MIUiBean;
 import com.leyifu.weiliaodemo.view.RecycleView;
 

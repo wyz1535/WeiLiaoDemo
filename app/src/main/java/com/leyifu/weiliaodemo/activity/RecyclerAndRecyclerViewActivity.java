@@ -6,7 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.leyifu.weiliaodemo.R;
-import com.leyifu.weiliaodemo.adpter.LeftAdapter;
+import com.leyifu.weiliaodemo.adapter.LeftAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,14 +1,19 @@
 package com.leyifu.weiliaodemo.activity;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,13 +22,15 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.leyifu.weiliaodemo.R;
-import com.leyifu.weiliaodemo.Utils.UtilsDown;
-import com.leyifu.weiliaodemo.adpter.ConversationListAdapterEx;
+import com.leyifu.weiliaodemo.adapter.ConversationListAdapterEx;
 import com.leyifu.weiliaodemo.bean.ServiceVerBean;
 import com.leyifu.weiliaodemo.interf.OnDownloadListeren;
+import com.leyifu.weiliaodemo.util.UtilsDown;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.rong.imkit.RongContext;
 import io.rong.imkit.fragment.ConversationListFragment;
@@ -37,9 +44,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "MainActivity";
     private static final int SERVICE_VERSION_DATA = 1;
     private Button bt_rong_could;
-    private Button bt_http,btn_rx_java,btn_retrofit_rx_java;
-    private Button bt_ok_http,btn_selector_address,btn_tab_layout,btn_web_view,btn_bear_line,btn_draw_arc,webView01;
-    private Button btn_open_native_app, btn_Green_dao, btn_constrain_layout, btn_immersive, btn_view, btn_recycler_view_card,btn_scroll_event;
+    private Button bt_http, btn_rx_java, btn_retrofit_rx_java, btn_video_play, btn_view_canvas;
+    private Button bt_ok_http, btn_selector_address, btn_tab_layout, btn_web_view, btn_bear_line, btn_draw_arc, webView01;
+    private Button btn_open_native_app, btn_Green_dao, btn_constrain_layout, btn_immersive, btn_view, btn_recycler_view_card, btn_scroll_event;
     private int verCode;
 
     Handler handler = new Handler() {
@@ -76,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                     break;
+                default:
+                    break;
             }
         }
 
@@ -83,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Conversation.ConversationType[] mConversationsTypes;
     private Button btn_app_togo_app;
     private View viewById;
+    private static final int PREMISSIONCODE = 1;
+    String[] premissionArray = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    List<String> premissionList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         webView01 = ((Button) findViewById(R.id.webView01));
         btn_rx_java = ((Button) findViewById(R.id.btn_rx_java));
         btn_retrofit_rx_java = ((Button) findViewById(R.id.btn_retrofit_rx_java));
+        btn_video_play = ((Button) findViewById(R.id.btn_video_play));
+        btn_view_canvas = ((Button) findViewById(R.id.btn_view_canvas));
 
         bt_rong_could.setOnClickListener(this);
         bt_http.setOnClickListener(this);
@@ -128,6 +142,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         webView01.setOnClickListener(this);
         btn_rx_java.setOnClickListener(this);
         btn_retrofit_rx_java.setOnClickListener(this);
+        btn_video_play.setOnClickListener(this);
+        btn_view_canvas.setOnClickListener(this);
 
 //        ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
         Intent intent = getIntent();
@@ -136,6 +152,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Uri data = intent.getData();
             String id = data.getQueryParameter("id");
             Log.e("MainActivity", "onCreate: id" + id);
+        }
+
+
+        for (String premission : premissionArray) {
+            if (ContextCompat.checkSelfPermission(this, premission) != PackageManager.PERMISSION_GRANTED) {
+//                premissionList.add(premission);
+                ActivityCompat.requestPermissions(this, new String[]{premission}, PREMISSIONCODE);
+            }
+        }
+//        ActivityCompat.requestPermissions(this,premissionList.toArray(new String[premissionList.size()]),PREMISSIONCODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PREMISSIONCODE:
+                for (int i = 0; i < permissions.length; i++) {
+                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                        Toast.makeText(MainActivity.this, "申请成功", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "申请失败", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -222,40 +266,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    intent.setComponent(component);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(this,"app没有下载，赶紧去下载吧",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "app没有下载，赶紧去下载吧", Toast.LENGTH_SHORT).show();
 //                    downLoad("http://www.otooman.com/app/comic1/apk/airplane_mm.apk");
-                    Intent viewIntent = new Intent("android.intent.action.VIEW",Uri.parse("http://www.otooman.com/app/comic1/apk/airplane_mm.apk"));
+                    Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse("http://www.otooman.com/app/comic1/apk/airplane_mm.apk"));
 //                    intent.setAction("android.intent.action.VIEW");
 //                    intent.setData(Uri.parse("http://www.otooman.com/app/comic1/apk/airplane_mm.apk"));
                     startActivity(viewIntent);
                 }
                 break;
             case R.id.btn_scroll_event:
-                startActivity(new Intent(MainActivity.this,RecyclerAndRecyclerViewActivity.class));
+                startActivity(new Intent(MainActivity.this, RecyclerAndRecyclerViewActivity.class));
                 break;
             case R.id.btn_selector_address:
-                startActivity(new Intent(MainActivity.this,SelectorAddressActivity.class));
+                startActivity(new Intent(MainActivity.this, SelectorAddressActivity.class));
                 break;
             case R.id.btn_tab_layout:
-                startActivity(new Intent(MainActivity.this,TabLayoutActivity.class));
+                startActivity(new Intent(MainActivity.this, TabLayoutActivity.class));
                 break;
             case R.id.btn_web_view:
-                startActivity(new Intent(MainActivity.this,WebViewActivity.class));
+                startActivity(new Intent(MainActivity.this, WebViewActivity.class));
                 break;
             case R.id.webView01:
-                startActivity(new Intent(MainActivity.this,WebViewActivity01.class));
+                startActivity(new Intent(MainActivity.this, WebViewActivity01.class));
                 break;
             case R.id.btn_bear_line:
-                startActivity(new Intent(MainActivity.this,BezierActivity.class));
+                startActivity(new Intent(MainActivity.this, BezierActivity.class));
                 break;
             case R.id.btn_draw_arc:
-                startActivity(new Intent(MainActivity.this,DrawArcActivity.class));
+                startActivity(new Intent(MainActivity.this, DrawArcActivity.class));
                 break;
             case R.id.btn_rx_java:
-                startActivity(new Intent(MainActivity.this,RxJavaActivity.class));
+                startActivity(new Intent(MainActivity.this, RxJavaActivity.class));
                 break;
             case R.id.btn_retrofit_rx_java:
-                startActivity(new Intent(MainActivity.this,RetrofitRxJavaActivity.class));
+                startActivity(new Intent(MainActivity.this, RetrofitRxJavaActivity.class));
+                break;
+            case R.id.btn_video_play:
+                startActivity(new Intent(MainActivity.this, VideosPlayActivity.class));
+                break;
+            case R.id.btn_view_canvas:
+//                startActivity(new Intent(MainActivity.this,ViewCanvasActivity.class));
+                break;
+            default:
                 break;
         }
     }

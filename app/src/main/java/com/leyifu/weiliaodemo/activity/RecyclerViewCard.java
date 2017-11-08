@@ -9,8 +9,8 @@ import android.widget.Toast;
 
 import com.leyifu.weiliaodemo.CardItemTouchHelperCallback;
 import com.leyifu.weiliaodemo.R;
-import com.leyifu.weiliaodemo.Utils.CardConfig;
-import com.leyifu.weiliaodemo.adpter.RecyclerViewCardAdapter;
+import com.leyifu.weiliaodemo.util.CardConfig;
+import com.leyifu.weiliaodemo.adapter.RecyclerViewCardAdapter;
 import com.leyifu.weiliaodemo.interf.OnSwipeListener;
 import com.leyifu.weiliaodemo.view.CardLayoutManager;
 
@@ -80,7 +80,6 @@ public class RecyclerViewCard extends AppCompatActivity {
         final CardLayoutManager cardLayoutManager = new CardLayoutManager(recyclerView, touchHelper);
         recyclerView.setLayoutManager(cardLayoutManager);
         touchHelper.attachToRecyclerView(recyclerView);
-
     }
 
     private void initData() {

@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-import com.leyifu.weiliaodemo.Utils.CardConfig;
+import com.leyifu.weiliaodemo.util.CardConfig;
 import com.leyifu.weiliaodemo.interf.OnSwipeListener;
 import com.leyifu.weiliaodemo.view.CardLayoutManager;
 

@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -28,14 +29,27 @@ import java.io.IOException;
 public class WebViewActivity01 extends AppCompatActivity {
 
     private static final String TAG = "WebViewActivity001";
-    private static final String name = "吴小满";
-    private static String phoneNum = "1553346745";
-//    private static final String URL = "http://192.168.0.105:8080/webImg/01.html?phoneNum=" + phoneNum + "&name=" + name;
-    private static final String URL = "http://192.168.0.105:8080/webImg/01.html";
+    private static final String userName = "吴小满";
+    private static String userId = "15524961535";
+    private static final String URL = "http://192.168.0.105:8080/webImg/01.html?userId=" + userId + "&userName=" + userName;
+    //    private static final String URL = "http://192.168.0.105:8080/webImg/01.html";  15527961535
     private String loadUrl;
     private WebView webView;
     private SwipeRefreshLayout swipe_refresh;
     private ProgressBar progress_bar;
+
+    Handler myHandler = new Handler();
+
+    Runnable runable = new Runnable() {
+
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+//            LoadingDialog.closeDialog();
+//            webview_another.loadUrl(myaliWebUrl.get("code_url"));
+
+    };
+};
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -65,14 +79,23 @@ public class WebViewActivity01 extends AppCompatActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 loadUrl = url;
-                if (url.startsWith("tel:")) {
-                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(url));
-                    startActivity(intent);
-                    return true;
+                if (parseScheme(url)) {
+                    try {
+                        Uri uri = Uri.parse(url);
+                        Intent intent;
+                        intent = Intent.parseUri(url,
+                                Intent.URI_INTENT_SCHEME);
+                        intent.addCategory("android.intent.category.BROWSABLE");
+                        intent.setComponent(null);
+                        // intent.setSelector(null);
+                        startActivity(intent);
+
+                    } catch (Exception e) {
+
+                    }
+                } else {
+                    view.loadUrl(url);
                 }
-                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
-                Log.i(TAG, "shouldOverrideUrlLoading url=" + url);
-                view.loadUrl(url);
                 return true;
             }
         });
@@ -89,6 +112,20 @@ public class WebViewActivity01 extends AppCompatActivity {
 //            }
 //        }
 //    };
+
+    public boolean parseScheme(String url) {
+
+        if (url.contains("platformapi/startapp")){
+            myHandler.removeCallbacks(runable);
+            return true;
+        } else if(url.contains("web-other")){
+
+            myHandler.postDelayed(runable, 10000);
+            return false;
+        }else {
+            return false;
+        }
+    }
 
     SwipeRefreshLayout.OnRefreshListener refreshLayout = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
