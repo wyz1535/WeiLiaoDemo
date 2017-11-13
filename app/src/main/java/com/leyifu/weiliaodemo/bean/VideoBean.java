@@ -1,13 +1,15 @@
 package com.leyifu.weiliaodemo.bean;
 
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 
 /**
  * Created by hahaha on 2017/11/2 0002.
  */
 
-public class VideoBean {
+public class VideoBean implements Parcelable{
 
     private int id;
     private String name;
@@ -74,5 +76,39 @@ public class VideoBean {
                 ", size=" + size +
                 ", duration=" + duration +
                 '}';
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(id);
+        out.writeString(name);
+        out.writeString(path);
+        out.writeLong(size);
+        out.writeLong(duration);
+    }
+
+    public static final Parcelable.Creator<VideoBean> CREATOR
+            = new Parcelable.Creator<VideoBean>() {
+        public VideoBean createFromParcel(Parcel in) {
+            return new VideoBean(in);
+        }
+
+        public VideoBean[] newArray(int size) {
+            return new VideoBean[size];
+        }
+    };
+
+    public VideoBean() {
+    }
+
+    private VideoBean(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        path = in.readString();
+        size = in.readLong();
+        duration = in.readLong();
     }
 }

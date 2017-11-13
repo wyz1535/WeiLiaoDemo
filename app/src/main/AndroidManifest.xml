@@ -117,7 +117,11 @@
         <activity android:name=".activity.VideosPlayActivity" />
         <activity android:name=".activity.ViewCanvasActivity" />
         <activity android:name=".activity.ViewCanvasTextActivity" />
-        <activity android:name=".activity.ViewCanvasClipActivity"></activity>
+        <activity android:name=".activity.ViewCanvasClipActivity" />
+        <activity
+            android:name=".activity.PlayActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"></activity>
     </application>
 
 </manifest>

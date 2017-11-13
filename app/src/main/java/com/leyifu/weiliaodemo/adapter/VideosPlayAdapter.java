@@ -29,7 +29,7 @@ import java.util.Map;
  * Created by hahaha on 2017/11/2 0002.
  */
 
-public class VideosPlayAdapter extends RecyclerView.Adapter<VideosPlayAdapter.ViewHolder> {
+public class VideosPlayAdapter extends RecyclerView.Adapter<VideosPlayAdapter.ViewHolder> implements View.OnClickListener {
 
     private Context mContext;
     private List<VideoBean> list;
@@ -97,12 +97,32 @@ public class VideosPlayAdapter extends RecyclerView.Adapter<VideosPlayAdapter.Vi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.e("cursor01", "onBindViewHolder: " + cursor);
-        View view = LayoutInflater.from(mContext).inflate(R.layout.rv_video_list_item, null);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.rv_video_list_item, parent, false);
+        view.setOnClickListener(this);
         VideoBean videoBean = new VideoBean();
         viewHolder = new ViewHolder(view, videoBean);
         view.setTag(viewHolder);
         return viewHolder;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickLisntener != null) {
+            ViewHolder viewHolder = (ViewHolder) v.getTag();
+            mOnItemClickLisntener.onItemClick(v,viewHolder.videoBean);
+        }
+    }
+
+
+    private OnItemClickLListener mOnItemClickLisntener;
+
+    public void setmOnItemClickLisntener(OnItemClickLListener onItemClickLisntener) {
+        this.mOnItemClickLisntener = onItemClickLisntener;
+    }
+
+    public interface OnItemClickLListener {
+        void onItemClick(View view,VideoBean videoBean);
     }
 
     @Override
