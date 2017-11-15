@@ -167,9 +167,9 @@ public class VideosPlayAdapter extends RecyclerView.Adapter<VideosPlayAdapter.Vi
             String thumbnailPath = thumbnailsMap.get(videoBean.getId());
             Log.e("thumbnailPath", "bind: " + thumbnailPath);
             if (thumbnailPath == null) {
+                iv_icon.setImageResource(R.drawable.ic_launcher);
 
-
-                getThumbnailToPath(videoBean.getPath());
+//                getThumbnailToPath(videoBean.getPath());
             } else {
                 iv_icon.setImageBitmap(BitmapFactory.decodeFile(thumbnailPath));
             }

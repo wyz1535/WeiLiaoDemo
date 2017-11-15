@@ -1,7 +1,6 @@
 package com.leyifu.weiliaodemo;
 
 import android.app.Application;
-import android.os.Process;
 
 import io.rong.imkit.RongIM;
 
@@ -29,4 +28,6 @@ public class MyApplication extends Application {
         RongIM.init(this);
 //        }
     }
+
+
 }
