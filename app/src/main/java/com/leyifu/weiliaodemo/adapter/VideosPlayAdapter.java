@@ -45,6 +45,16 @@ public class VideosPlayAdapter extends RecyclerView.Adapter<VideosPlayAdapter.Vi
         new VideoTask().execute(contentResolver);
     }
 
+    public VideoBean getItem(int targetPosition) {
+        if (cursor != null) {
+            cursor.moveToPosition(targetPosition);
+            VideoBean videoBean = new VideoBean();
+            videoBean.reuse(cursor);
+            return videoBean;
+        }
+        return null;
+    }
+
     private class VideoTask extends AsyncTask<ContentResolver, Void, Cursor> {
 
 
@@ -99,7 +109,7 @@ public class VideosPlayAdapter extends RecyclerView.Adapter<VideosPlayAdapter.Vi
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.rv_video_list_item, parent, false);
         view.setOnClickListener(this);
-        VideoBean videoBean = new VideoBean();
+       VideoBean videoBean = new VideoBean();
         viewHolder = new ViewHolder(view, videoBean);
         view.setTag(viewHolder);
         return viewHolder;
@@ -110,7 +120,7 @@ public class VideosPlayAdapter extends RecyclerView.Adapter<VideosPlayAdapter.Vi
     public void onClick(View v) {
         if (mOnItemClickLisntener != null) {
             ViewHolder viewHolder = (ViewHolder) v.getTag();
-            mOnItemClickLisntener.onItemClick(v,viewHolder.videoBean);
+            mOnItemClickLisntener.onItemClick(v,viewHolder.videoBean ,viewHolder.getAdapterPosition());
         }
     }
 
@@ -122,7 +132,7 @@ public class VideosPlayAdapter extends RecyclerView.Adapter<VideosPlayAdapter.Vi
     }
 
     public interface OnItemClickLListener {
-        void onItemClick(View view,VideoBean videoBean);
+        void onItemClick(View view,VideoBean videoBean,int position);
     }
 
     @Override
